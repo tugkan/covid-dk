@@ -22,18 +22,16 @@ Apify.main(async () => {
             const tested = parseInt($($($($(".rte table tbody tr")).get(0)).find("td").get(1)).text().replace(',','').replace('.','').match(/\d+/), 10)
             const infected = parseInt($($($($(".rte table tbody tr")).get(0)).find("td").get(2)).text().replace(',','').replace('.','').match(/\d+/), 10)
             const deceased = parseInt($($($($(".rte table tbody tr")).get(0)).find("td").get(3)).text().replace(',','').replace('.','').match(/\d+/), 10)
-            
+
             const data = {
                 tested,
                 infected,
-                deceased,                
+                deceased,
                 sourceUrl,
                 lastUpdatedAtApify: new Date(Date.UTC(now.getFullYear(), now.getMonth(), now.getDate(), now.getHours() + 1, now.getMinutes())).toISOString(),
                 readMe: 'https://apify.com/tugkan/covid-dk',
             };
 
-
-            console.log(data)
             // Compare and save to history
             const latest = await kvStore.getValue(LATEST) || {};
             delete latest.lastUpdatedAtApify;
